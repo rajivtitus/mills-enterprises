@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Grid, TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Button, Grid, TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { useForm } from "react-hook-form";
 
 import useStyles from "./shippingFormStyles";
 import { commerce } from "../../../lib/commerce";
 
-const ShippingForm = () => {
+const ShippingForm = ({ setOrderData, handleNext }) => {
   const classes = useStyles();
   const { id: chktToken } = useSelector((state) => state.checkoutToken);
   const [shippingCountries, setShippingCountries] = useState([]);
@@ -16,6 +17,7 @@ const ShippingForm = () => {
   const [shippingOption, setShippingOption] = useState("");
   const countries = Object.entries(shippingCountries).map(([code, name]) => ({ code, name }));
   const subdivisions = Object.entries(shippingSubdivisions).map(([code, name]) => ({ code, name }));
+  const { register, handleSubmit } = useForm();
 
   const getShippingCountries = async (checkoutToken) => {
     const { countries } = await commerce.services.localeListShippingCountries(checkoutToken);
@@ -38,6 +40,11 @@ const ShippingForm = () => {
     setShippingOption(options[0].id);
   };
 
+  const submitShippingDetails = (shippingData) => {
+    setOrderData({ ...shippingData, shippingCountry, shippingSubdivision, shippingOption });
+    handleNext();
+  };
+
   useEffect(() => {
     if (chktToken) getShippingCountries(chktToken);
   }, [chktToken]);
@@ -56,25 +63,25 @@ const ShippingForm = () => {
 
   return (
     <div>
-      <form noValidate autoComplete="off">
+      <form onSubmit={handleSubmit((data) => submitShippingDetails(data))} autoComplete="off">
         <Grid container className={classes.formGrid} spacing={3}>
           <Grid item xs={12} sm={6}>
-            <TextField name="firstName" label="First Name" fullWidth required />
+            <TextField name="firstName" label="First Name" inputRef={register} fullWidth required />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="lastName" label="Last Name" fullWidth required />
+            <TextField name="lastName" label="Last Name" inputRef={register} fullWidth required />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="email" label="Email Address" fullWidth required />
+            <TextField name="email" label="Email Address" inputRef={register} fullWidth required />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="street" label="Street" fullWidth required />
+            <TextField name="street" label="Street" inputRef={register} fullWidth required />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="city" label="City" fullWidth required />
+            <TextField name="city" label="City" inputRef={register} fullWidth required />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField name="postalCode" label="Postal Code" fullWidth required />
+            <TextField name="postalCode" label="Postal Code" inputRef={register} fullWidth required />
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputLabel id="country">Country</InputLabel>
@@ -122,6 +129,14 @@ const ShippingForm = () => {
             </Select>
           </Grid>
         </Grid>
+        <div className={classes.formActions}>
+          <Button variant="outlined" disabled={true}>
+            Go Back
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   );

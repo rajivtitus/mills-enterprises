@@ -10,9 +10,4 @@ export default makeStyles((theme) => ({
             width: 600,
         }
     },
-    stepActions: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '3rem 2rem',
-    }
 }))

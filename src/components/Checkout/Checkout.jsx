@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Paper, StepLabel, Stepper, Step, Typography } from "@material-ui/core";
+import { Container, Paper, StepLabel, Stepper, Step, Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 
 import useStyles from "./checkoutStyles";
@@ -12,23 +12,10 @@ function getSteps() {
   return ["Shipping Information", "Payment", "Review Order"];
 }
 
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return <ShippingForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <ReviewOrder />;
-    default:
-      return "An error has occured. Please try again!";
-  }
-}
-
 const Checkout = () => {
   const { id } = useSelector((state) => state.cart);
   const [activeStep, setActiveStep] = useState(0);
-  // const [orderData, setOrderData] = useState({});
+  const [orderData, setOrderData] = useState({});
   const dispatch = useDispatch();
   const classes = useStyles();
   const steps = getSteps();
@@ -39,6 +26,19 @@ const Checkout = () => {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const getStepContent = (stepIndex) => {
+    switch (stepIndex) {
+      case 0:
+        return <ShippingForm setOrderData={setOrderData} handleNext={handleNext} />;
+      case 1:
+        return <PaymentForm setOrderData={setOrderData} handleBack={handleBack} handleNext={handleNext} />;
+      case 2:
+        return <ReviewOrder handleBack={handleBack} handleNext={handleNext} />;
+      default:
+        return "An error has occured. Please try again!";
+    }
   };
 
   useEffect(() => {
@@ -59,17 +59,7 @@ const Checkout = () => {
           {activeStep === steps.length ? (
             <Typography variant="h6">All steps completed</Typography>
           ) : (
-            <>
-              {getStepContent(activeStep)}
-              <div className={classes.stepActions}>
-                <Button variant="outlined" onClick={handleBack} disabled={activeStep === 0}>
-                  Go Back
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
-                  Next
-                </Button>
-              </div>
-            </>
+            <>{getStepContent(activeStep)}</>
           )}
         </>
       </Paper>
