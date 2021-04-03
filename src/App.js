@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import {useDispatch} from 'react-redux'
+import {Route, Switch} from 'react-router-dom'
 
-function App() {
+import Nav from "./components/Nav/Nav";
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import Home from "./components/Home/Home";
+import Cart from './components/Cart/Cart'
+import ProductDetail from './components/ProductDetail/ProductDetail'
+import Checkout from './components/Checkout/Checkout'
+import Footer from "./components/Footer/Footer";
+import {fetchProducts} from './actions/productsActions'
+import {fetchCart} from './actions/cartActions'
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchCart());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Nav />
+      <ScrollToTop />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/cart' component={Cart} />      
+        <Route exact path='/product/:id' component={ProductDetail} />  
+        <Route exact path='/checkout' component={Checkout} />      
+      </Switch>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;

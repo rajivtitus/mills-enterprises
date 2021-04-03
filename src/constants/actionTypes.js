@@ -1,0 +1,6 @@
+export const FETCH_ALL_PRODUCTS = 'FETCH_ALL_PRODUCTS';
+export const FETCH_CART = 'FETCH_CART'
+export const ADD_ITEM = 'ADD_ITEM'
+export const EMPTY_CART = 'EMPTY_CART'
+export const UPDATE_CART = 'UPDATE_CART'
+export const GENERATE_CHECKOUT_TOKEN = 'GENERATE_CHECKOUT_TOKEN'
