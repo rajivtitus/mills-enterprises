@@ -24,15 +24,17 @@ const ProductDetail = () => {
   return (
     <>
       <Container className={classes.container}>
-        <div className={`${classes.productImg} ${classes.productFlex}`}>
-          <img src={product.media.source} alt={product.name} title={product.name} />
+        <div className={`${classes.imageContainer} ${classes.productFlex}`}>
+          <img className={classes.productImage} src={product.media.source} alt={product.name} title={product.name} />
         </div>
         <div className={`${classes.productDesc} ${classes.productFlex}`}>
-          <Typography variant="h4">{product.name}</Typography>
+          <Typography className={classes.title} variant="h4">
+            {product.name}
+          </Typography>
           <Typography variant="body1" color="textSecondary" dangerouslySetInnerHTML={{ __html: product.description }} />
           <Typography variant="h6">Price: {product.price.formatted_with_symbol}</Typography>
           <div>
-            <div className={classes.productActions}>
+            <div className={classes.productQtyActions}>
               <Typography variant="h6">Quantity:</Typography>
               <IconButton
                 onClick={() => (quantity > 1 ? setQuantity((prevQuantity) => prevQuantity - 1) : setQuantity(1))}
@@ -45,6 +47,7 @@ const ProductDetail = () => {
               </IconButton>
             </div>
             <Button
+              className={classes.actionButton}
               onClick={() => dispatch(addToCart(product.id, quantity))}
               variant="outlined"
               startIcon={<AddShoppingCartIcon />}
@@ -55,9 +58,9 @@ const ProductDetail = () => {
         </div>
       </Container>
       {product.related_products.length && (
-        <Container style={{ marginBottom: "7.5rem" }}>
+        <Container className={classes.relatedItemsContainer}>
           <Divider />
-          <Typography variant="h5" style={{ marginTop: "1rem" }} gutterBottom>
+          <Typography className={classes.relatedItemsTitle} variant="h5" gutterBottom>
             Related Items
           </Typography>
           <Grid container spacing={3}>

@@ -9,7 +9,7 @@ import ReviewOrder from "./ReviewOrder/ReviewOrder";
 import { generateCheckoutToken } from "../../actions/checkoutActions";
 
 function getSteps() {
-  return ["Shipping Information", "Payment", "Review Order"];
+  return ["Shipping Information", "Payment Details", "Confirm Order"];
 }
 
 const Checkout = () => {
@@ -19,6 +19,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const steps = getSteps();
+  console.log(orderData);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -33,9 +34,16 @@ const Checkout = () => {
       case 0:
         return <ShippingForm setOrderData={setOrderData} handleNext={handleNext} />;
       case 1:
-        return <PaymentForm setOrderData={setOrderData} handleBack={handleBack} handleNext={handleNext} />;
+        return (
+          <PaymentForm
+            orderData={orderData}
+            setOrderData={setOrderData}
+            handleBack={handleBack}
+            handleNext={handleNext}
+          />
+        );
       case 2:
-        return <ReviewOrder handleBack={handleBack} handleNext={handleNext} />;
+        return <ReviewOrder orderData={orderData} handleBack={handleBack} handleNext={handleNext} />;
       default:
         return "An error has occured. Please try again!";
     }

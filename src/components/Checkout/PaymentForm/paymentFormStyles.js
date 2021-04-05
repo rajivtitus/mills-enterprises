@@ -8,5 +8,8 @@ export default makeStyles(() => ({
     },
     formContainer: {
         padding: '1rem 2rem',
+    },
+    formTitle: {
+        marginBottom: '2rem',
     }
 }))

@@ -1,11 +1,12 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
     container: {
+        minHeight: '85vh',
         padding: '1rem',
         marginBottom: '7.5rem',
     },
     title: {
-        padding: '1.5rem 0rem'
+        marginBottom:  '2rem',
     }
 }))

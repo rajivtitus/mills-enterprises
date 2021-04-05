@@ -1,9 +1,20 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
 
-const ReviewOrder = () => {
+const useStyles = makeStyles(() => ({
+  formContainer: {
+    padding: "1rem 2rem",
+  },
+}));
+
+const ReviewOrder = ({ handleBack, handleNext, orderData }) => {
+  const classes = useStyles();
+
   return (
-    <div>
-      <h2>Review Order</h2>
+    <div className={classes.formContainer}>
+      <Typography variant="h6">Review Order</Typography>
+      <form></form>
     </div>
   );
 };

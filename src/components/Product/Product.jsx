@@ -9,7 +9,7 @@ const Product = ({ product }) => {
 
   return (
     <Link to={`/product/${product.id}`} className={classes.link}>
-      <Card>
+      <Card className={classes.card}>
         <CardMedia
           className={classes.media}
           image={product.media.source}
@@ -17,7 +17,7 @@ const Product = ({ product }) => {
           title={product.name}
         />
         <CardContent>
-          <Typography variant="h6" gutterBottom>
+          <Typography className={classes.cardTitle} variant="h6" gutterBottom>
             {product.name}
           </Typography>
           <Typography variant="body2" color="textSecondary">

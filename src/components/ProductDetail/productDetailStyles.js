@@ -1,29 +1,51 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
     container:{
         minHeight: '90vh',
         display: 'flex',
-        gap:'2rem',
-        padding: '2rem 1rem',
+        gap:'1rem',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+            paddingBottom: '3.5rem',
+        },
     },
     productFlex: {
         flex: 1,
         display: 'flex',
         justifyContent:'center',
     },
-    productImg: {
-        alignItems: 'center',        
+    title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.75rem',
+        }
+    },
+    imageContainer: {
+        alignItems: 'center',              
+    },
+    productImage: {
+        maxHeight: '100%',
+        maxWidth: '100%',
     },
     productDesc: {
         flexDirection: 'column',
-        gap: '0.25rem', 
+        padding: '1rem 0rem',
     },
-    productActions:{
+    productQtyActions:{
         display: 'flex',
         alignItems: 'center',
-        marginBottom: '3.5rem',
+        marginBottom: '1.5rem',
         gap: '1rem',
     },
-  
+    actionButton: {
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        }
+    },
+    relatedItemsContainer: {
+        marginBottom: "7.5rem",
+    },
+    relatedItemsTitle: {
+        margin: "1.75rem 0rem",
+    }
 }))
