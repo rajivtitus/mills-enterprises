@@ -2,6 +2,7 @@ import React from "react";
 import {
   Button,
   Container,
+  IconButton,
   Typography,
   TableContainer,
   Table,
@@ -11,6 +12,9 @@ import {
   TableCell,
   Paper,
 } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -54,9 +58,13 @@ const Cart = () => {
                   <Typography variant="h6">{item.name}</Typography>
                 </TableCell>
                 <TableCell align="center">
-                  <Button onClick={() => dispatch(updateCart(item.id, item.quantity - 1))}>-</Button>
+                  <IconButton onClick={() => dispatch(updateCart(item.id, item.quantity - 1))}>
+                    {item.quantity === 1 ? <DeleteIcon /> : <RemoveIcon />}
+                  </IconButton>
                   {item.quantity}
-                  <Button onClick={() => dispatch(updateCart(item.id, item.quantity + 1))}>+</Button>
+                  <IconButton onClick={() => dispatch(updateCart(item.id, item.quantity + 1))}>
+                    <AddIcon />
+                  </IconButton>
                 </TableCell>
                 <TableCell align="center">{item.price.formatted_with_symbol}</TableCell>
                 <TableCell align="center">{`₹${item.quantity * item.price.formatted}`}</TableCell>
@@ -66,7 +74,7 @@ const Cart = () => {
         </Table>
       </TableContainer>
       <div className={classes.cartActions}>
-        <Button onClick={() => dispatch(emptyCart())} variant="contained" color="secondary">
+        <Button onClick={() => dispatch(emptyCart())} variant="contained">
           Empty Cart
         </Button>
         <Button component={Link} to="/checkout" variant="contained" color="primary">

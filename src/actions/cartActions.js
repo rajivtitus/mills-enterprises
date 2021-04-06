@@ -52,3 +52,16 @@ export const updateCart = (productId, quantity) => async(dispatch) => {
         console.log(error)
     }
 }
+
+export const refreshCart = () => async(dispatch) => {
+    try {
+        const {cart} = await commerce.cart.refresh();
+        dispatch({
+            type: cartActions.REFRESH_CART,
+            payload: cart,
+        })
+    }
+    catch(error){
+        console.log(error)
+    }
+}

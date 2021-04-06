@@ -49,7 +49,7 @@ const ProductDetail = () => {
             <Button
               className={classes.actionButton}
               onClick={() => dispatch(addToCart(product.id, quantity))}
-              variant="outlined"
+              variant="contained"
               startIcon={<AddShoppingCartIcon />}
             >
               Add To Cart

@@ -7,6 +7,7 @@ const cartReducer = (state = {}, action) => {
         case cartActions.ADD_ITEM:
         case cartActions.EMPTY_CART:
         case cartActions.UPDATE_CART:
+        case cartActions.REFRESH_CART:
             return {...action.payload}
 
         default:

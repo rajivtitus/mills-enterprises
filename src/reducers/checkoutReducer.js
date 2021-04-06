@@ -1,9 +1,23 @@
 import * as checkoutActions from '../constants/actionTypes'
 
-const checkoutReducer = (state={},action) => {
+const defaultState = {
+    token: {},
+    order: {},
+}
+
+const checkoutReducer = (state = defaultState, action) => {
     switch (action.type){
         case checkoutActions.GENERATE_CHECKOUT_TOKEN:
-            return {...action.payload}
+            return {
+                ...state,
+                token: {...action.payload},
+            }
+        
+        case checkoutActions.CAPTURE_CHECKOUT:
+            return {
+                ...state,
+                order: {...action.payload}
+            }
 
         default:
             return state

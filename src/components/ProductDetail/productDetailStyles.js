@@ -29,12 +29,12 @@ export default makeStyles((theme) => ({
     },
     productDesc: {
         flexDirection: 'column',
-        padding: '1rem 0rem',
     },
     productQtyActions:{
         display: 'flex',
         alignItems: 'center',
-        marginBottom: '1.5rem',
+        padding: '0.5rem 0rem',
+        marginBottom: '1.75rem',
         gap: '1rem',
     },
     actionButton: {

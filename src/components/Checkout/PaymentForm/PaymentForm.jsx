@@ -32,8 +32,8 @@ const PaymentForm = ({ handleBack, handleNext, orderData, setOrderData }) => {
 
   return (
     <div className={classes.formContainer}>
-      <Typography className={classes.formTitle} variant="h6">
-        Please enter your card details below:
+      <Typography className={classes.formTitle} variant="body1">
+        Please enter your card number:
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>

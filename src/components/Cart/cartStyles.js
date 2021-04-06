@@ -16,7 +16,7 @@ export default makeStyles(() => ({
     cartActions: {
         display: 'flex',
         justifyContent: 'flex-end',
-        padding: '2rem 0rem 1rem 0rem',
+        padding: '2rem 0rem',
         gap: '1.25rem',
     },
     cartTitle: {
@@ -26,12 +26,9 @@ export default makeStyles(() => ({
         width: '5rem',
         height: '5rem',
     },
-    table :{
-        minWidth: 650,
-    },
     productCell :{
         display: 'flex',
         alignItems: 'center',
-        gap: '2rem',
+        gap: '1.5rem',
     }
 }))

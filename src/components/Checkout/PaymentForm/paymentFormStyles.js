@@ -4,12 +4,13 @@ export default makeStyles(() => ({
     formActions: {
         display: 'flex',
         justifyContent: 'space-between',
-        padding: '3rem 2rem',
+        marginTop: '2.5rem',
+        padding: '2rem 0rem',
     },
     formContainer: {
         padding: '1rem 2rem',
     },
     formTitle: {
-        marginBottom: '2rem',
+        marginBottom: '3.5rem',
     }
 }))

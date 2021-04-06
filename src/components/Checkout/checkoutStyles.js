@@ -10,4 +10,14 @@ export default makeStyles((theme) => ({
             width: 600,
         }
     },
+    orderConfirmation: {
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
+        alignItems: 'center',
+        margin: '2rem 1rem',
+    },
+    homeButton: {
+        margin: '2.5rem 0rem',
+    }
 }))

@@ -7,7 +7,7 @@ import checkoutReducer from './checkoutReducer'
 const rootReducer = combineReducers({
     products: productsReducer,
     cart: cartReducer,
-    checkoutToken: checkoutReducer,
+    checkout: checkoutReducer,
 })
 
 export default rootReducer

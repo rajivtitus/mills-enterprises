@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container, Paper, StepLabel, Stepper, Step, Typography } from "@material-ui/core";
+import { Button, Container, Paper, StepLabel, Stepper, Step, Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import useStyles from "./checkoutStyles";
 import ShippingForm from "./ShippingForm/ShippingForm";
@@ -13,13 +14,15 @@ function getSteps() {
 }
 
 const Checkout = () => {
-  const { id } = useSelector((state) => state.cart);
+  const {
+    cart,
+    checkout: { order },
+  } = useSelector((state) => state);
   const [activeStep, setActiveStep] = useState(0);
   const [orderData, setOrderData] = useState({});
   const dispatch = useDispatch();
   const classes = useStyles();
   const steps = getSteps();
-  console.log(orderData);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -50,8 +53,8 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if (id) dispatch(generateCheckoutToken(id));
-  }, [id, dispatch]);
+    if (cart.id) dispatch(generateCheckoutToken(cart.id));
+  }, [cart, dispatch]);
 
   return (
     <Container className={classes.container}>
@@ -65,7 +68,15 @@ const Checkout = () => {
         </Stepper>
         <>
           {activeStep === steps.length ? (
-            <Typography variant="h6">All steps completed</Typography>
+            <div className={classes.orderConfirmation}>
+              <Typography variant="h6">
+                Thank you for shopping with us! Your order confirmation number is: {order.id}
+              </Typography>
+
+              <Button className={classes.homeButton} component={Link} to="/" variant="outlined">
+                Back To Home
+              </Button>
+            </div>
           ) : (
             <>{getStepContent(activeStep)}</>
           )}

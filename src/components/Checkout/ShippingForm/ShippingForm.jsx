@@ -8,7 +8,7 @@ import { commerce } from "../../../lib/commerce";
 
 const ShippingForm = ({ setOrderData, handleNext }) => {
   const classes = useStyles();
-  const { id: chktToken } = useSelector((state) => state.checkoutToken);
+  const { id: chktToken } = useSelector((state) => state.checkout.token);
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
